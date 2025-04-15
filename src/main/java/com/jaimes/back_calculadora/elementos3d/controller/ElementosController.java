@@ -2,17 +2,21 @@ package com.jaimes.back_calculadora.elementos3d.controller;
 
 import com.jaimes.back_calculadora.elementos3d.dto.input.ElementoDTO;
 import com.jaimes.back_calculadora.elementos3d.service.ElementoService;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/elementos")
 @CrossOrigin("*")
-@AllArgsConstructor
 public class ElementosController {
 
     private final ElementoService elementoService;
+
+    @Autowired
+    public ElementosController(ElementoService elementoService) {
+        this.elementoService = elementoService;
+    }
 
     @GetMapping("/tipos")
     public ResponseEntity<?> elementos(){

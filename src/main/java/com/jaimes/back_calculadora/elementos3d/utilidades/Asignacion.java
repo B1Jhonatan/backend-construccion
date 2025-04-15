@@ -16,7 +16,7 @@ public class Asignacion {
     public static Elementos3D elementos3dGuardar(ElementoDTO elementoDTO){
         Elementos3D elementos3D = new Elementos3D();
         Tipo tipo = new Tipo();
-        tipo.setId(elementoDTO.getId());
+        tipo.setId(elementoDTO.getIdTipo());
         tipo.setTipo(elementoDTO.getTipo());
         elementos3D.setElemento3D(elementoDTO.getElemento());
         elementos3D.setCantidad(elementoDTO.getCantidad());

@@ -58,7 +58,7 @@ public class ElementoImplement implements ElementoService {
 
     @Override
     public Elementos3D actualizarElemento3d(ElementoDTO elementoDTO) {
-        Elementos3D elementos3D = elemento3dRepository.findById(elementoDTO.getId())
+        Elementos3D elementos3D = elemento3dRepository.findById(elementoDTO.getIdElemento())
                 .orElseThrow(() -> new EntityNotFoundException("Elemento3D no encontrado"));;
         elementos3D = Asignacion.elementos3dActualizar(elementoDTO, elementos3D);
         return elemento3dRepository.save(elementos3D);
