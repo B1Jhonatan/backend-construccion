@@ -1,6 +1,6 @@
-package com.jaimes.back_calculadora.elemento3d.dto.input;
+package com.jaimes.back_calculadora.general.dto.input;
 
-public class ElementoDTO {
+public class TipoDTO {
 
     private Integer idTipo;
     private String tipo;
@@ -13,10 +13,10 @@ public class ElementoDTO {
     private Double areaUnidad;
     private Double areaTotal;
 
-    public ElementoDTO() {
+    public TipoDTO() {
     }
 
-    public ElementoDTO(Integer idTipo, String tipo, Integer idElemento, String elemento, Integer cantidad, Double largo, Double ancho, Double alto, Double areaUnidad, Double areaTotal) {
+    public TipoDTO(Integer idTipo, String tipo, Integer idElemento, String elemento, Integer cantidad, Double largo, Double ancho, Double alto, Double areaUnidad, Double areaTotal) {
         this.idTipo = idTipo;
         this.tipo = tipo;
         this.idElemento = idElemento;

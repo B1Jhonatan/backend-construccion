@@ -1,51 +1,61 @@
 package com.jaimes.back_calculadora.elemento3d.utilidades;
 
 import com.jaimes.back_calculadora.elemento3d.dto.output.Elemento3dDTO;
-import com.jaimes.back_calculadora.elemento3d.dto.output.TipoElementosDTO;
+import com.jaimes.back_calculadora.general.dto.output.TipoElementosDTO;
 import com.jaimes.back_calculadora.general.entity.Areas;
 import com.jaimes.back_calculadora.elemento3d.entity.Elementos3D;
 import com.jaimes.back_calculadora.elemento3d.entity.Medidas3D;
-import com.jaimes.back_calculadora.elemento3d.dto.input.ElementoDTO;
+import com.jaimes.back_calculadora.general.dto.input.TipoDTO;
 import com.jaimes.back_calculadora.general.entity.Tipo;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Asignacion3d {
 
-    public static Elementos3D elementos3dGuardar(ElementoDTO elementoDTO){
+    /*
+    Toma un elementoDTO y lo transforma a mi entidad para poder almacenarlo en la base
+    de datos
+     */
+    public static Elementos3D elementos3dGuardar(TipoDTO tipoDTO){
         Elementos3D elementos3D = new Elementos3D();
         Tipo tipo = new Tipo();
-        tipo.setId(elementoDTO.getIdTipo());
-        tipo.setTipo(elementoDTO.getTipo());
-        elementos3D.setElemento3D(elementoDTO.getElemento());
-        elementos3D.setCantidad(elementoDTO.getCantidad());
+        tipo.setId(tipoDTO.getIdTipo());
+        tipo.setTipo(tipoDTO.getTipo());
+        elementos3D.setElemento3D(tipoDTO.getElemento());
+        elementos3D.setCantidad(tipoDTO.getCantidad());
         elementos3D.setTipo(tipo);
         Medidas3D medidas3D = new Medidas3D();
-        medidas3D.setLargo(elementoDTO.getLargo());
-        medidas3D.setAncho(elementoDTO.getAncho());
-        medidas3D.setAlto(elementoDTO.getAlto());
+        medidas3D.setLargo(tipoDTO.getLargo());
+        medidas3D.setAncho(tipoDTO.getAncho());
+        medidas3D.setAlto(tipoDTO.getAlto());
         medidas3D.setElemento3D(elementos3D);
         elementos3D.setMedidas(medidas3D);
         Areas areas = new Areas();
-        areas.setAreaUnidad(elementoDTO.getAreaUnidad());
-        areas.setAreaTotal(elementoDTO.getAreaTotal());
+        areas.setAreaUnidad(tipoDTO.getAreaUnidad());
+        areas.setAreaTotal(tipoDTO.getAreaTotal());
         areas.setElemento3D(elementos3D);
         elementos3D.setAreas(areas);
         return elementos3D;
     }
 
-    public static Elementos3D elementos3dActualizar(ElementoDTO elementoDTO, Elementos3D elementos3D){
-        elementos3D.setElemento3D(elementoDTO.getElemento());
-        elementos3D.setCantidad(elementoDTO.getCantidad());
+
+    /*
+    resive un un elementoDTO para actualizar un elemento3D de la base de tatos, el metodo se encarga
+    de mapear los elementos que vienen desde el frontend
+     */
+    public static Elementos3D elementos3dActualizar(TipoDTO tipoDTO, Elementos3D elementos3D){
+        elementos3D.setElemento3D(tipoDTO.getElemento());
+        elementos3D.setCantidad(tipoDTO.getCantidad());
         Medidas3D medidas3D = elementos3D.getMedidas();
-        medidas3D.setLargo(elementoDTO.getLargo());
-        medidas3D.setAncho(elementoDTO.getAncho());
-        medidas3D.setAlto(elementoDTO.getAlto());
+        medidas3D.setLargo(tipoDTO.getLargo());
+        medidas3D.setAncho(tipoDTO.getAncho());
+        medidas3D.setAlto(tipoDTO.getAlto());
         medidas3D.setElemento3D(elementos3D);
         Areas areas = elementos3D.getAreas();
-        areas.setAreaUnidad(elementoDTO.getAreaUnidad());
-        areas.setAreaTotal(elementoDTO.getAreaTotal());
+        areas.setAreaUnidad(tipoDTO.getAreaUnidad());
+        areas.setAreaTotal(tipoDTO.getAreaTotal());
         areas.setElemento3D(elementos3D);
         elementos3D.setMedidas(medidas3D);
         elementos3D.setMedidas(medidas3D);
@@ -53,6 +63,11 @@ public class Asignacion3d {
         return elementos3D;
     }
 
+
+    /*
+    El elemento3D desde la base de datos y lo redefine en una entidad dto
+    para su manejo en frontend
+     */
     public static Elemento3dDTO convertirElemento3dDTO(Elementos3D elementos3D){
         Elemento3dDTO elemento3dDTO = new Elemento3dDTO();
         elemento3dDTO.setId(elementos3D.getId());
@@ -66,6 +81,11 @@ public class Asignacion3d {
         return elemento3dDTO;
     }
 
+
+    /*
+    Este metodo static transforma un elemento que viene desde la base de datos
+    y lo devuelve como un elemento dto
+    */
     public static TipoElementosDTO tipoElementosDTO(Tipo tipo) {
         TipoElementosDTO tipoElementosDTO = new TipoElementosDTO();
         tipoElementosDTO.setId(tipo.getId());
@@ -84,6 +104,16 @@ public class Asignacion3d {
             listaDTO.add(dto);
         }
         tipoElementosDTO.setElementos3D(listaDTO);
+        return tipoElementosDTO;
+    }
+
+    public static TipoElementosDTO tipoElementosDtoOrdenadoName(Tipo tipo){
+        TipoElementosDTO tipoElementosDTO = tipoElementosDTO(tipo);
+        List<Elemento3dDTO> elemento3dDTO = tipoElementosDTO.getElementos3D();
+        // Ordenar por nombre de elemento
+        elemento3dDTO.sort(Comparator.comparing(Elemento3dDTO::getElemento));
+        // Setear lista ordenada de nuevo en el DTO
+        tipoElementosDTO.setElementos3D(elemento3dDTO);
         return tipoElementosDTO;
     }
 

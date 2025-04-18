@@ -1,4 +1,4 @@
-package com.jaimes.back_calculadora.general.dto;
+package com.jaimes.back_calculadora.general.dto.output;
 
 public class TipoListaDTO {
 

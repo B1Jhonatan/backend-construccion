@@ -1,4 +1,4 @@
-package com.jaimes.back_calculadora.elemento3d.dto.output;
+package com.jaimes.back_calculadora.general.dto.output;
 
 public class AreasDTO {
 

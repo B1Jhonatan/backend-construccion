@@ -1,4 +1,4 @@
-package com.jaimes.back_calculadora.elemento3d.controller;
+package com.jaimes.back_calculadora.general.controller;
 
 import com.jaimes.back_calculadora.elemento3d.service.Elemento3dService;
 import com.jaimes.back_calculadora.elemento3d.dto.input.MedidasDTO;
