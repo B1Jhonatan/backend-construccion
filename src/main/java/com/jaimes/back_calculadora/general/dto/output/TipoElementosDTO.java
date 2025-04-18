@@ -1,5 +1,7 @@
-package com.jaimes.back_calculadora.elemento3d.dto.output;
+package com.jaimes.back_calculadora.general.dto.output;
 
+
+import com.jaimes.back_calculadora.elemento3d.dto.output.Elemento3dDTO;
 
 import java.util.List;
 
