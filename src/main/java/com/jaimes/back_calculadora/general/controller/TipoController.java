@@ -14,25 +14,34 @@ public class TipoController {
         this.tipoService = tipoService;
     }
 
-    //Lista los tipos solo con id y nombre
+    //Lista los tipos solo con ID y nombre.
     @GetMapping("/lista")
     public ResponseEntity<?> elementos(){
         return ResponseEntity.ok(tipoService.todosTipos());
     }
 
-    //Se obtienen todos los elementos de un tipo
-    @PostMapping("/elementos/{id}")
+    //Se obtienen todos los elementos de un tipo.
+    @GetMapping("/{id}/elementos")
     public ResponseEntity<?> tipo(@PathVariable Integer id){
         return ResponseEntity.ok(tipoService.todosTipoElementos(id));
     }
 
-    //Ordena los elementos por nombre
-    @PostMapping("/ordenar/{id}")
+    //Ordena los elementos por nombre.
+    @GetMapping("/{id}/ordenar-nombre")
     public ResponseEntity<?> ordenarName(@PathVariable Integer id){
-        return ResponseEntity.ok(tipoService.tiposElementosSort(id));
+        return ResponseEntity.ok(tipoService.tipoElementosSortName(id));
     }
 
-    //Ordena los elementos por area total
+    //Ordena los elementos por area mayor a menor.
+    @GetMapping("/{id}/ordenar-area-mayor")
+    public ResponseEntity<?> ordenarAreaMayor(@PathVariable Integer id){
+        return ResponseEntity.ok(tipoService.tipoElementosSortAreaMayor(id));
+    }
 
-    //Ordena los elementos por area unitaria
+    //Ordena los elementos por area menor a mayor.
+    @GetMapping("/{id}/ordenar-area-menor")
+    public ResponseEntity<?> ordenarAreaMenor(@PathVariable Integer id){
+        return ResponseEntity.ok(tipoService.tipoElemetnosSortAreaMenor(id));
+    }
+
 }
